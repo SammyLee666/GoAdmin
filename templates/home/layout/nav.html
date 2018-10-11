@@ -1,0 +1,60 @@
+{{define "home/layout/nav"}}
+<div class="nav-bg">
+    <div class="layui-header header">
+        <a class="logo" href="/">
+            <img src="https://avatars3.githubusercontent.com/u/22285205?s=460&v=4" alt="layui">
+        </a>
+        <div class="layui-form component">
+            <input type="text" name="title" required lay-verify="required" placeholder="查找" autocomplete="off"
+                   class="layui-input">
+        </div>
+
+        <ul class="layui-nav" lay-filter="">
+            <li class="layui-nav-item"><a href="">最新活动</a></li>
+            <li class="layui-nav-item layui-this"><a href="">产品</a></li>
+            <li class="layui-nav-item"><a href="">大数据</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">解决方案</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="">移动模块</a></dd>
+                    <dd><a href="">后台模版</a></dd>
+                    <dd><a href="">电商平台</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">社区</a></li>
+        </ul>
+    </div>
+    <div class="motto-box">
+        <p class="motto">
+        {{.Mooto}}<br>
+            - <br>{{.MootoName}}</p>
+    </div>
+</div>
+
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+        //…
+    });
+
+    var mottoPostion = (($(window).height() - 60) - $(".motto").height()) / 3;
+    $(".nav-bg").css({
+        height: $(window).height() + "px",
+        "background-image": "url(https://annie-header-bg-1253939655.cos.ap-beijing.myqcloud.com/65.jpg)",
+    });
+    $(".motto").css({
+        margin: mottoPostion + "px 25% 0"
+    })
+    $(window).resize(function () {
+        $(".nav-bg").css({
+            height: $(window).height() + "px",
+        });
+
+        var mottoPostion = (($(window).height() - 60) - $(".motto").height()) / 3;
+        $(".motto").css({
+            margin: mottoPostion + "px 25% 0"
+        })
+    });
+</script>
+{{end}}
