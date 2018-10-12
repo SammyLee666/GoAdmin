@@ -11,8 +11,9 @@ func RegisterAdminARoute(r *gin.Engine){
 
 	admin := r.Group("/admin")
 	{
-		admin.GET("/", controllers.Index)
-		admin.GET("/profile", controllers.UserProfile)
+		admin.GET("", controllers.Show)
+		admin.POST("", controllers.Post)
+		admin.GET("profile", controllers.UserProfile)
 
 	}
 }
