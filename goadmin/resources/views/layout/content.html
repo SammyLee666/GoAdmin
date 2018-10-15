@@ -196,7 +196,7 @@
                         </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
                     <div class="box-body" style="display: block;">
-                        <form method="POST" action="/auth/menu" class="form-horizontal" accept-charset="UTF-8"
+                        <form method="POST" action="" class="form-horizontal" accept-charset="UTF-8"
                               pjax-container="1">
                             <div class="box-body fields-group">
 
@@ -205,9 +205,6 @@
                                     <label for="parent_id" class="col-sm-2  control-label">父级菜单</label>
 
                                     <div class="col-sm-8">
-
-
-                                        <input type="hidden" name="parent_id">
 
                                         <select class="form-control parent_id select2-hidden-accessible"
                                                 style="width: 100%;" name="parent_id" data-value="" tabindex="-1"
@@ -347,7 +344,7 @@
 
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                            <input type="text" id="title" name="title" value=""
+                                            <input type="text" id="title" name="title"
                                                    class="form-control title" placeholder="输入 标题">
                                         </div>
 
@@ -378,49 +375,30 @@
                                     </div>
                                 </div>
                                 <div class="form-group  ">
-
                                     <label for="uri" class="col-sm-2  control-label">路径</label>
-
                                     <div class="col-sm-8">
-
-
                                         <div class="input-group">
-
                                             <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-
-                                            <input type="text" id="uri" name="uri" value="" class="form-control uri"
+                                            <input type="text" id="uri" name="uri" class="form-control uri"
                                                    placeholder="输入 路径">
-
-
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="form-group  ">
-
                                     <label for="roles" class="col-sm-2  control-label">角色</label>
-
                                     <div class="col-sm-8">
-
 
                                         <select class="form-control roles select2-hidden-accessible"
                                                 style="width: 100%;" name="roles[]" multiple="" data-placeholder="输入 角色"
                                                 data-value="" tabindex="-1" aria-hidden="true">
+
                                             <option value="1">Administrator</option>
+
                                         </select>
                                         <input type="hidden" name="roles[]">
-
                                     </div>
                                 </div>
-
-                                <input type="hidden" name="_token" value="K0RMFKx9IrsCb6DNPrK83jZERvUu2DA9XFYLVmrf"
-                                       class="_token">
-
-
                             </div>
-
-                            <input type="hidden" name="_token" value="K0RMFKx9IrsCb6DNPrK83jZERvUu2DA9XFYLVmrf">
 
                             <!-- /.box-body -->
                             <div class="box-footer">
@@ -437,7 +415,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div><!-- /.box-body -->
                 </div>
             </div>
@@ -464,10 +441,10 @@
                         return new Promise(function (resolve) {
                             $.ajax({
                                 method: 'post',
-                                url: '/auth/menu/' + id,
+                                url: '/admin/auth/menu/' + id,
                                 data: {
                                     _method: 'delete',
-                                    _token: LA.token,
+                                    _token: "asd",
                                 },
                                 success: function (data) {
                                     $.pjax.reload('#pjax-container');
@@ -492,7 +469,7 @@
             $('.tree-5bbec93e53968-save').click(function () {
                 var serialize = $('#tree-5bbec93e53968').nestable('serialize');
                 console.log(JSON.stringify(serialize));
-                $.post('admin', {
+                $.post('', {
                             _token: "asdasd",
                             _order: JSON.stringify(serialize)
                         },
