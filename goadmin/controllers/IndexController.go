@@ -7,10 +7,22 @@ import (
 	"goadmin/goadmin/models"
 	"encoding/json"
 	"gopkg.in/go-playground/validator.v8"
+	"github.com/gin-contrib/sessions"
+	"log"
 )
 
 func Show(c *gin.Context) {
-	c.HTML(http.StatusOK, "goadmin/layout/index", nil)
+	var errMsg models.ErrMsg
+	session := sessions.Default(c)
+	errors := session.Flashes("errors")
+	session.Save()
+	if len(errors) > 0 {
+		errMsg = errors[0].(models.ErrMsg)
+	}
+
+	c.HTML(http.StatusOK, "goadmin/layout/index", gin.H{
+		"errors": errMsg,
+	})
 }
 
 func Post(c *gin.Context) {
@@ -22,60 +34,58 @@ func Post(c *gin.Context) {
 		var menu models.Menu
 		err := c.ShouldBind(&menu);
 		if err != nil {
+			session := sessions.Default(c)
 			ve := err.(validator.ValidationErrors)
+			errMsg := models.ErrMsg{}
 			for _, e := range ve {
-				fmt.Println(e.Field)
 				if e.Field == "Pid" {
 					switch e.Tag {
-					case "required":
-						c.JSON(http.StatusBadRequest, gin.H{"error": "父级菜单必选"})
-						return
+					case "min":
+						errMsg["parent_id"] = "父级菜单ID出错"
+					case "max":
+						errMsg["parent_id"] = "父级菜单ID出错"
 					default:
-						c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-						return
+						errMsg["parent_id"] = err.Error()
 					}
 				}
 				if e.Field == "Title" {
 					switch e.Tag {
 					case "min":
-						c.JSON(http.StatusBadRequest, gin.H{"error": "标题必须填写"})
-						return
+						errMsg["title"] = "标题必须填写"
 					case "max":
-						c.JSON(http.StatusBadRequest, gin.H{"error": "标题长度不超过50"})
-						return
+						errMsg["title"] = "标题长度不超过50"
 					default:
-						c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-						return
+						errMsg["title"] = err.Error()
 					}
 				}
 				if e.Field == "Icon" {
 					switch e.Tag {
 					case "min":
-						c.JSON(http.StatusBadRequest, gin.H{"error": "图标必须选择"})
-						return
+						errMsg["icon"] = "图标必须选择"
 					case "max":
-						c.JSON(http.StatusBadRequest, gin.H{"error": "选择图标出现错误"})
-						return
+						errMsg["icon"] = "选择图标出现错误"
 					default:
-						c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-						return
+						errMsg["icon"] = err.Error()
 					}
 				}
 				if e.Field == "Uri" {
 					switch e.Tag {
 					case "min":
-						c.JSON(http.StatusBadRequest, gin.H{"error": "路径必须填写"})
-						return
+						errMsg["uri"] = "路径必须填写"
 					case "max":
-						c.JSON(http.StatusBadRequest, gin.H{"error": "路径长度不超过50"})
-						return
+						errMsg["uri"] = "路径长度不超过50"
 					default:
-						c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-						return
+						errMsg["uri"] = err.Error()
 					}
 				}
 			}
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			log.Println(errMsg)
+			session.AddFlash(errMsg, "errors")
+			if err := session.Save(); err != nil {
+				c.String(400, err.Error())
+				return
+			}
+			c.Redirect(http.StatusFound, c.Request.Header.Get("Referer"))
 			return
 		}
 	} else {
@@ -96,20 +106,6 @@ func changeParentId(order string) {
 	var childs []*models.Child
 	json.Unmarshal([]byte(order), &childs)
 	parse(childs, 0)
-}
-
-func ListOfErrors(e error) []map[string]string {
-	ve := e.(validator.ValidationErrors)
-	InvalidFields := make([]map[string]string, 0)
-
-	for _, e := range ve {
-		errors := map[string]string{}
-		// field := reflect.TypeOf(e.NameNamespace)
-		errors[e.Name] = e.Tag
-		InvalidFields = append(InvalidFields, errors)
-	}
-
-	return InvalidFields
 }
 
 func parse(childs []*models.Child, PID int) {

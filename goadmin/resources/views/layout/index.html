@@ -15,18 +15,22 @@
     <link rel="stylesheet" href="/assets/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
     <!-- select2 style -->
     <link rel="stylesheet" href="/assets/select2/select2.min.css">
+    <!-- sweetalert style -->
+    <link rel="stylesheet" href="/assets/sweetalert/dist/sweetalert.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="/assets/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/assets/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/assets/dist/css/AdminLTE.css">
     <!-- nestable style -->
     <link rel="stylesheet" href="/assets/nestable/nestable.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="/assets/dist/css/skins/_all-skins.min.css">
+    <style>
 
+    </style>
     <!-- jQuery 3 -->
-    {{/*<script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>*/}}
+{{/*<script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>*/}}
     <!-- jQuery 2 -->
     <script src="/assets/jQuery/jQuery-2.1.4.min.js"></script>
 
@@ -48,9 +52,9 @@
         <!-- Logo -->
         <a href="/assets/index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><b>G</b>O</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>Go</b>Admin</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -525,8 +529,7 @@
         <!-- /.sidebar -->
     </aside>
 
-{{template "goadmin/layout/content"}}
-
+{{template "goadmin/layout/content" .}}
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -743,6 +746,8 @@
 <script src="/assets/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="/assets/dist/js/adminlte.min.js"></script>
+<!-- sweetalert -->
+<script src="/assets/sweetalert/dist/sweetalert.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/assets/dist/js/demo.js"></script>
 </body>

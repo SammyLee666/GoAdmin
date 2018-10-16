@@ -18,7 +18,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	Sessions = session.DB("blog").C("sessions")
+	Sessions = session.DB("goadmin").C("sessions")
 
 	//db
 	db, err := gorm.Open("mysql", os.Getenv("MYSQL"))

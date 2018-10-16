@@ -6,8 +6,8 @@ import (
 	_ "github.com/joho/godotenv/autoload"
 	"goadmin/routes"
 	"goadmin/goadmin/route"
-	"github.com/gin-contrib/sessions/mongo"
 	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/mongo"
 	"goadmin/db"
 )
 
@@ -28,15 +28,21 @@ func loadMiddlewares(r *gin.Engine) {
 	//admin 静态资源
 	r.Static("/assets", "./goadmin/resources/assets")
 
+	//templates
 	r.LoadHTMLGlob("templates/**/**/*")
 
 	// session
 	store := mongo.NewStore(db.Sessions, 3600, true, []byte("secret"))
+	//store := cookie.NewStore([]byte("secret"))
+	store.Options(sessions.Options{
+		//Domain: "localhost",
+		MaxAge: 3 * 24 * 3600,
+	})
 	r.Use(sessions.Sessions("goulang", store))
 }
 
 func loadRouters(r *gin.Engine) {
 	r.GET("", routes.Index)
-
+	r.GET("test", routes.Test)
 
 }
