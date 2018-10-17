@@ -9,6 +9,7 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/mongo"
 	"goadmin/db"
+	"html/template"
 )
 
 func main() {
@@ -27,6 +28,12 @@ func loadMiddlewares(r *gin.Engine) {
 
 	//admin 静态资源
 	r.Static("/assets", "./goadmin/resources/assets")
+
+	r.SetFuncMap(template.FuncMap{
+		"func": func() string {
+			return "func"
+		},
+	})
 
 	//templates
 	r.LoadHTMLGlob("templates/**/**/*")

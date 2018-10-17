@@ -8,20 +8,51 @@ import (
 	"encoding/json"
 	"gopkg.in/go-playground/validator.v8"
 	"github.com/gin-contrib/sessions"
-	"log"
+	"net/url"
+	"goadmin/db"
+	"encoding/xml"
 )
 
 func Show(c *gin.Context) {
+	var oldMsg url.Values
 	var errMsg models.ErrMsg
+
+	v := &models.TreeDom{Class: "dd-list"}
+	v.List = append(v.List, models.LiDom{
+		Class:  "dd-item",
+		DataId: "1",
+		Handle: models.DivHandleDom{
+
+		},
+	})
+	//v.Svs = append(v.Svs, server{"Beijing_VPN", "127.0.0.2"})
+	output, err := xml.MarshalIndent(v, "  ", "    ")
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	}
+	// os.Stdout.Write([]byte(xml.Header))
+
+	// os.Stdout.Write(output)
+	//将字节流转换成string输出
+	fmt.Println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + string(output))
+
 	session := sessions.Default(c)
 	errors := session.Flashes("errors")
+	oldForm := session.Flashes("oldForm")
 	session.Save()
+
 	if len(errors) > 0 {
 		errMsg = errors[0].(models.ErrMsg)
 	}
+	if len(oldForm) > 0 {
+		oldMsg = oldForm[0].(url.Values)
+	}
+	//TreeView
+	models.TreeView()
 
 	c.HTML(http.StatusOK, "goadmin/layout/index", gin.H{
-		"errors": errMsg,
+		"_errors": errMsg,
+		"_old":    oldMsg,
 	})
 }
 
@@ -37,6 +68,7 @@ func Post(c *gin.Context) {
 			session := sessions.Default(c)
 			ve := err.(validator.ValidationErrors)
 			errMsg := models.ErrMsg{}
+			oldForm := url.Values{}
 			for _, e := range ve {
 				if e.Field == "Pid" {
 					switch e.Tag {
@@ -79,7 +111,8 @@ func Post(c *gin.Context) {
 					}
 				}
 			}
-			log.Println(errMsg)
+			oldForm = c.Request.PostForm
+			session.AddFlash(oldForm, "oldForm")
 			session.AddFlash(errMsg, "errors")
 			if err := session.Save(); err != nil {
 				c.String(400, err.Error())
@@ -88,6 +121,9 @@ func Post(c *gin.Context) {
 			c.Redirect(http.StatusFound, c.Request.Header.Get("Referer"))
 			return
 		}
+		model := db.Mysql.Create(&menu)
+		fmt.Println(model)
+		fmt.Println(menu.ID)
 	} else {
 		changeParentId(order)
 	}
@@ -95,7 +131,7 @@ func Post(c *gin.Context) {
 }
 
 func Edit(c *gin.Context) {
-
+	fmt.Println(1)
 }
 
 func Dele(c *gin.Context) {
