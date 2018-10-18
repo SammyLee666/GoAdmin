@@ -41,17 +41,40 @@ type (
 	}
 
 	LiDom struct {
-		Class    string       `xml:"class,attr"`
+		Class    string       `xml:"class,attr,omitempty"`
 		DataId   string       `xml:"data-id,attr"`
 		Handle   DivHandleDom `xml:"div"`
-		ChildDom *TreeDom     `xml:"ol"`
+		ChildDom TreeDom      `xml:"ol,omitempty"`
+	}
+
+	IDom struct {
+		Class string `xml:"class,attr"`
+	}
+
+	ADom struct {
+		Href  string `xml:"href,attr"`
+		Class string `xml:"class,attr"`
+		Title string `xml:",innerxml"`
+	}
+
+	AListDom struct {
+		Href   string `xml:"href,attr"`
+		DataId string `xml:"data-id,attr,omitempty"`
+		Class  string `xml:"class,attr,omitempty"`
+		I      IDom   `xml:"i"`
+	}
+
+	SpanDom struct {
+		Class string     `xml:"class,attr"`
+		AList []AListDom `xml:"a"`
 	}
 
 	DivHandleDom struct {
-		Class string `xml:"class,attr"`
-		//IDom  struct {
-		//	Class string `xml:"class,attr"`
-		//}
+		Class  string  `xml:"class,attr"`
+		Fa     IDom    `xml:"i"`
+		Strong string  `xml:"strong"`
+		A      ADom    `xml:"a"`
+		Span   SpanDom `xml:"span"`
 	}
 )
 
@@ -59,7 +82,6 @@ func TreeView() {
 	//var menus []Menu
 	//var treeString string
 	//db.Mysql.Find(&menus)
-	//
 	//treeParse()
 }
 
@@ -73,4 +95,16 @@ func treeParse(childs []*Child, PID int) {
 			treeParse(v.Child, v.ID)
 		}
 	}
+}
+
+func CheckIsAChild(menus []Menu, CurrentNodeId int) (Children []Menu, status bool) {
+	for _, v := range menus {
+		if v.Pid == CurrentNodeId {
+			Children = append(Children, v)
+		}
+	}
+	if len(Children) > 0 {
+		status = true
+	}
+	return
 }

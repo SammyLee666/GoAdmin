@@ -11,30 +11,118 @@ import (
 	"net/url"
 	"goadmin/db"
 	"encoding/xml"
+	"log"
+	"html/template"
+	"strconv"
 )
 
 func Show(c *gin.Context) {
 	var oldMsg url.Values
 	var errMsg models.ErrMsg
+	var menus []models.Menu
+	var tree models.TreeDom
+	var Li models.LiDom
+	db.Mysql.Find(&menus)
 
-	v := &models.TreeDom{Class: "dd-list"}
-	v.List = append(v.List, models.LiDom{
-		Class:  "dd-item",
-		DataId: "1",
-		Handle: models.DivHandleDom{
+	tree = models.TreeDom{Class: "dd-list"}
+	for i, v := range menus {
+		fmt.Println(i, strconv.Itoa(v.ID))
+		//RootNode
+		if v.Pid == 0 {
+			//Create Root Node
+			Li = models.LiDom{
+				Class:  "dd-item",
+				DataId: strconv.Itoa(v.ID),
+				Handle: models.DivHandleDom{
+					Class: "dd-handle",
+					Fa: models.IDom{
+						Class: "fa " + v.Icon,
+					},
+					Strong: v.Title,
+					A: models.ADom{
+						Href:  v.Uri,
+						Class: "dd-nodrag",
+						Title: "&nbsp;&nbsp;" + v.Uri,
+					},
+					Span: models.SpanDom{
+						Class: "pull-right dd-nodrag",
+						AList: []models.AListDom{
+							{
+								Href: "/auth/menu/" + strconv.Itoa(v.ID) + "/edit",
+								I: models.IDom{
+									Class: "fa fa-edit",
+								},
+							},
+							{
+								Href:   "javascript:void(0);",
+								DataId: strconv.Itoa(v.ID),
+								Class:  "tree_branch_delete",
+								I: models.IDom{
+									Class: "fa fa-trash",
+								},
+							},
+						},
+					},
+				},
+				//ChildDom: tree,
+			}
+			tree.List = append(tree.List, Li)
 
-		},
-	})
-	//v.Svs = append(v.Svs, server{"Beijing_VPN", "127.0.0.2"})
-	output, err := xml.MarshalIndent(v, "  ", "    ")
-	if err != nil {
-		fmt.Printf("error: %v\n", err)
+			//Is a Child Node
+			children, isChild := models.CheckIsAChild(menus, v.ID)
+			if isChild {
+				treeChild := models.TreeDom{Class: "dd-list"}
+				//Create Child Node
+				for _, v := range children {
+					Li = models.LiDom{
+						Class:  "dd-item",
+						DataId: strconv.Itoa(v.ID),
+						Handle: models.DivHandleDom{
+							Class: "dd-handle",
+							Fa: models.IDom{
+								Class: "fa " + v.Icon,
+							},
+							Strong: v.Title,
+							A: models.ADom{
+								Href:  v.Uri,
+								Class: "dd-nodrag",
+								Title: "&nbsp;&nbsp;" + v.Uri,
+							},
+							Span: models.SpanDom{
+								Class: "pull-right dd-nodrag",
+								AList: []models.AListDom{
+									{
+										Href: "/auth/menu/" + strconv.Itoa(v.ID) + "/edit",
+										I: models.IDom{
+											Class: "fa fa-edit",
+										},
+									},
+									{
+										Href:   "javascript:void(0);",
+										DataId: strconv.Itoa(v.ID),
+										Class:  "tree_branch_delete",
+										I: models.IDom{
+											Class: "fa fa-trash",
+										},
+									},
+								},
+							},
+						},
+					}
+					treeChild.List = append(treeChild.List, Li)
+				}
+
+				tree.List = append(tree.List, Li)
+				Li.ChildDom = treeChild
+			}
+		}
 	}
-	// os.Stdout.Write([]byte(xml.Header))
 
-	// os.Stdout.Write(output)
-	//将字节流转换成string输出
-	fmt.Println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + string(output))
+	output, err := xml.MarshalIndent(tree, "  ", "    ")
+	if err != nil {
+		log.Printf("error: %v\n", err)
+	}
+	html := template.HTML(string(output))
 
 	session := sessions.Default(c)
 	errors := session.Flashes("errors")
@@ -53,6 +141,7 @@ func Show(c *gin.Context) {
 	c.HTML(http.StatusOK, "goadmin/layout/index", gin.H{
 		"_errors": errMsg,
 		"_old":    oldMsg,
+		"tree":    html,
 	})
 }
 
