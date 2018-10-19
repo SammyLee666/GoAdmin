@@ -4,14 +4,16 @@ import (
 	"time"
 	"encoding/gob"
 	"net/url"
-	"fmt"
 	"encoding/xml"
+	"strconv"
 )
 
 func init() {
 	gob.Register(ErrMsg{})
 	gob.Register(url.Values{})
 }
+
+const Indent = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`
 
 type (
 	//Table
@@ -34,9 +36,11 @@ type (
 
 	ErrMsg map[string]interface{}
 
+	Option map[string]string
+
 	TreeDom struct {
-		XMLName xml.Name `xml:"ol"`
-		Class   string   `xml:"class,attr"`
+		XMLName xml.Name `xml:"ol,omitempty"`
+		Class   string   `xml:"class,attr,omitempty"`
 		List    []LiDom  `xml:"li"`
 	}
 
@@ -79,20 +83,57 @@ type (
 )
 
 func TreeView() {
-	//var menus []Menu
-	//var treeString string
-	//db.Mysql.Find(&menus)
-	//treeParse()
+
 }
 
-func treeParse(childs []*Child, PID int) {
-	for _, v := range childs {
-		//Create
-		fmt.Println(PID, v.ID, v.Child)
-
-		if len(v.Child) > 0 {
-			//解析Child
-			treeParse(v.Child, v.ID)
+func TreeParse(menus []Menu, currentID int, handle *TreeDom, title string, option *[]Option, depth int) {
+	var currentIndent string
+	for i := 0; i < depth; i++ {
+		currentIndent += Indent
+	}
+	*option = append(*option, Option{"Value":strconv.Itoa(currentID),"Text":currentIndent + title})
+	//Is a Child Node
+	children, isChild := CheckIsAChild(menus, currentID)
+	if isChild {
+		//Create Child Node
+		for _, v := range children {
+			Li := LiDom{
+				Class:  "dd-item",
+				DataId: strconv.Itoa(v.ID),
+				Handle: DivHandleDom{
+					Class: "dd-handle",
+					Fa: IDom{
+						Class: "fa " + v.Icon,
+					},
+					Strong: v.Title,
+					A: ADom{
+						Href:  v.Uri,
+						Class: "dd-nodrag",
+						Title: "&nbsp;&nbsp;" + v.Uri,
+					},
+					Span: SpanDom{
+						Class: "pull-right dd-nodrag",
+						AList: []AListDom{
+							{
+								Href: "/auth/menu/" + strconv.Itoa(v.ID) + "/edit",
+								I: IDom{
+									Class: "fa fa-edit",
+								},
+							},
+							{
+								Href:   "javascript:void(0);",
+								DataId: strconv.Itoa(v.ID),
+								Class:  "tree_branch_delete",
+								I: IDom{
+									Class: "fa fa-trash",
+								},
+							},
+						},
+					},
+				},
+			}
+			handle.List = append(handle.List, Li)
+			TreeParse(children, v.ID, handle, v.Title, option, depth+1)
 		}
 	}
 }

@@ -30,8 +30,11 @@ func loadMiddlewares(r *gin.Engine) {
 	r.Static("/assets", "./goadmin/resources/assets")
 
 	r.SetFuncMap(template.FuncMap{
-		"OutputHTML": func(html template.HTML) template.HTML {
-			return html
+		"OutputHTML": func(html string) template.HTML {
+			return template.HTML(html)
+		},
+		"OutputJS": func(html string) template.JS {
+			return template.JS(html)
 		},
 	})
 

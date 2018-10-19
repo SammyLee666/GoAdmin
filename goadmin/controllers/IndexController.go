@@ -12,8 +12,8 @@ import (
 	"goadmin/db"
 	"encoding/xml"
 	"log"
-	"html/template"
 	"strconv"
+	"goadmin/goadmin/utils"
 )
 
 func Show(c *gin.Context) {
@@ -22,12 +22,16 @@ func Show(c *gin.Context) {
 	var menus []models.Menu
 	var tree models.TreeDom
 	var Li models.LiDom
+
 	db.Mysql.Find(&menus)
 
 	tree = models.TreeDom{Class: "dd-list"}
-	for i, v := range menus {
-		fmt.Println(i, strconv.Itoa(v.ID))
-		//RootNode
+	option := new([]models.Option)
+	*option = append(*option, models.Option{"Value": "0", "Selected": "selected", "Text": "Root"})
+
+	RootCounter := 0
+	for _, v := range menus {
+
 		if v.Pid == 0 {
 			//Create Root Node
 			Li = models.LiDom{
@@ -69,52 +73,10 @@ func Show(c *gin.Context) {
 			tree.List = append(tree.List, Li)
 
 			//Is a Child Node
-			children, isChild := models.CheckIsAChild(menus, v.ID)
-			if isChild {
-				treeChild := models.TreeDom{Class: "dd-list"}
-				//Create Child Node
-				for _, v := range children {
-					Li = models.LiDom{
-						Class:  "dd-item",
-						DataId: strconv.Itoa(v.ID),
-						Handle: models.DivHandleDom{
-							Class: "dd-handle",
-							Fa: models.IDom{
-								Class: "fa " + v.Icon,
-							},
-							Strong: v.Title,
-							A: models.ADom{
-								Href:  v.Uri,
-								Class: "dd-nodrag",
-								Title: "&nbsp;&nbsp;" + v.Uri,
-							},
-							Span: models.SpanDom{
-								Class: "pull-right dd-nodrag",
-								AList: []models.AListDom{
-									{
-										Href: "/auth/menu/" + strconv.Itoa(v.ID) + "/edit",
-										I: models.IDom{
-											Class: "fa fa-edit",
-										},
-									},
-									{
-										Href:   "javascript:void(0);",
-										DataId: strconv.Itoa(v.ID),
-										Class:  "tree_branch_delete",
-										I: models.IDom{
-											Class: "fa fa-trash",
-										},
-									},
-								},
-							},
-						},
-					}
-					treeChild.List = append(treeChild.List, Li)
-				}
-
-				tree.List = append(tree.List, Li)
-				Li.ChildDom = treeChild
-			}
+			handle := models.TreeDom{Class: "dd-list"}
+			models.TreeParse(menus, v.ID, &handle, v.Title, option, 1)
+			tree.List[RootCounter].ChildDom = handle
+			RootCounter ++
 		}
 	}
 
@@ -122,11 +84,13 @@ func Show(c *gin.Context) {
 	if err != nil {
 		log.Printf("error: %v\n", err)
 	}
-	html := template.HTML(string(output))
+
+	html := string(output)
 
 	session := sessions.Default(c)
 	errors := session.Flashes("errors")
 	oldForm := session.Flashes("oldForm")
+	toastr := session.Flashes("toastr")
 	session.Save()
 
 	if len(errors) > 0 {
@@ -141,11 +105,14 @@ func Show(c *gin.Context) {
 	c.HTML(http.StatusOK, "goadmin/layout/index", gin.H{
 		"_errors": errMsg,
 		"_old":    oldMsg,
+		"_toastr": toastr,
 		"tree":    html,
+		"select":  option,
 	})
 }
 
 func Post(c *gin.Context) {
+
 	order := c.PostForm("_order")
 	if len(order) == 0 {
 		//初次运行创建表
@@ -204,7 +171,7 @@ func Post(c *gin.Context) {
 			session.AddFlash(oldForm, "oldForm")
 			session.AddFlash(errMsg, "errors")
 			if err := session.Save(); err != nil {
-				c.String(400, err.Error())
+				log.Printf("session.Save %s", err.Error())
 				return
 			}
 			c.Redirect(http.StatusFound, c.Request.Header.Get("Referer"))
@@ -212,7 +179,10 @@ func Post(c *gin.Context) {
 		}
 		model := db.Mysql.Create(&menu)
 		fmt.Println(model)
-		fmt.Println(menu.ID)
+
+		utils.Toastr(c).Success("提交成功！")
+		c.Redirect(http.StatusFound, c.Request.Header.Get("Referer"))
+		return
 	} else {
 		changeParentId(order)
 	}
