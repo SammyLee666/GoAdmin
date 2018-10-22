@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a745639a-e4c2-4a5d-a65e-9bce2d83cea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/goadmin/middleware/common.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/goadmin/resources/assets/toastr/build/toastr.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/goadmin/resources/assets/toastr/build/toastr.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/goadmin/utils/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goadmin/controllers/IndexController.go" beforeDir="false" afterPath="$PROJECT_DIR$/goadmin/controllers/IndexController.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goadmin/models/MenuModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/goadmin/models/MenuModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goadmin/resources/views/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/goadmin/resources/views/index/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goadmin/resources/views/layout/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/goadmin/resources/views/layout/content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goadmin/resources/views/layout/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/goadmin/resources/views/layout/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goadmin/utils/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/goadmin/utils/common.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,18 +27,19 @@
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.7" value="3" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.open.time.9" value="4" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.open.time.9" value="5" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="4" />
-          <entry key="env" value="1" />
+          <entry key="ent" value="1" />
+          <entry key="env" value="2" />
           <entry key="gif" value="1" />
-          <entry key="go" value="116" />
+          <entry key="go" value="135" />
           <entry key="h" value="1" />
-          <entry key="html" value="30" />
+          <entry key="html" value="37" />
           <entry key="html___jb_tmp___" value="2" />
           <entry key="jpg" value="2" />
           <entry key="js" value="14" />
@@ -57,11 +56,12 @@
         <counts>
           <entry key="C++" value="1" />
           <entry key="CSS" value="4" />
-          <entry key="Go" value="116" />
-          <entry key="HTML" value="30" />
+          <entry key="DTD" value="1" />
+          <entry key="Go" value="135" />
+          <entry key="HTML" value="37" />
           <entry key="Image" value="4" />
           <entry key="JavaScript" value="14" />
-          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="PLAIN_TEXT" value="6" />
           <entry key="RNG Compact" value="1" />
           <entry key="SourceMap" value="1" />
           <entry key="TypeScript" value="1" />
@@ -73,9 +73,9 @@
         <counts>
           <entry key="css" value="1" />
           <entry key="dummy" value="18" />
-          <entry key="env" value="8" />
-          <entry key="go" value="8164" />
-          <entry key="html" value="2981" />
+          <entry key="env" value="19" />
+          <entry key="go" value="10205" />
+          <entry key="html" value="3104" />
           <entry key="html___jb_tmp___" value="1" />
           <entry key="js" value="10" />
           <entry key="s" value="5" />
@@ -84,10 +84,10 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="1" />
-          <entry key="Go" value="8164" />
-          <entry key="HTML" value="2981" />
+          <entry key="Go" value="10205" />
+          <entry key="HTML" value="3104" />
           <entry key="JavaScript" value="10" />
-          <entry key="PLAIN_TEXT" value="27" />
+          <entry key="PLAIN_TEXT" value="38" />
           <entry key="x86 Plan9 Assembly" value="5" />
         </counts>
       </usages-collector>
@@ -106,8 +106,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="736">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="384">
+              <caret line="34" column="10" lean-forward="true" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/goadmin/models/MenuModel.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+              <folding>
+                <element signature="e#16#99#0" expanded="true" />
+                <element signature="n#!!block;n#CreateHandle#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,19 +128,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/goadmin/controllers/IndexController.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/goadmin/utils/common.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+            <state relative-caret-position="245">
+              <caret line="133" selection-start-line="133" selection-end-line="133" />
               <folding>
-                <element signature="e#15#95#0" expanded="true" />
+                <element signature="e#21#279#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -136,8 +140,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/goadmin/resources/views/layout/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12432">
-              <caret line="777" column="8" selection-start-line="777" selection-start-column="8" selection-end-line="777" selection-end-column="8" />
+            <state relative-caret-position="292">
+              <caret line="776" lean-forward="true" selection-start-line="776" selection-end-line="780" />
             </state>
           </provider>
         </entry>
@@ -145,8 +149,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/goadmin/resources/views/layout/content.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2848">
-              <caret line="178" selection-start-line="178" selection-end-line="178" />
+            <state relative-caret-position="245">
+              <caret line="224" column="45" lean-forward="true" selection-start-line="224" selection-start-column="45" selection-end-line="224" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/GOPATH/go/src/github.com/jinzhu/gorm/main.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="113" column="13" selection-start-line="113" selection-start-column="13" selection-end-line="113" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/goadmin/utils/common.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-15">
+              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+              <folding>
+                <element signature="e#15#95#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,24 +190,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="CSS File" />
         <option value="Go File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>has-error</find>
-      <find>.form-group.has-error label {</find>
-      <find>roles</find>
-      <find>Root</find>
-      <find>clear</find>
-      <find>title</find>
-      <find>map</find>
-      <find>fu\\</find>
-      <find>}}{{.}}{{</find>
-      <find>{{.}}</find>
       <find>Title</find>
       <find>DataId</find>
       <find>children</find>
@@ -185,8 +209,6 @@
       <find>Value:2</find>
       <find>OutputHtml</find>
       <find>Value:3</find>
-      <find>log</find>
-      <find>fmt</find>
       <find>保存</find>
       <find>tree</find>
       <find>gin.Context</find>
@@ -194,6 +216,18 @@
       <find>AddF</find>
       <find>Context</find>
       <find>OutputHTML</find>
+      <find>6</find>
+      <find>i</find>
+      <find>&quot;i&quot;</find>
+      <find>&lt;/</find>
+      <find />
+      <find>&amp;nbsp;&amp;nbsp;</find>
+      <find>fa.SetText(&quot;</find>
+      <find>SetText</find>
+      <find>nbsp</find>
+      <find>fmt</find>
+      <find>/&gt;</find>
+      <find>log</find>
     </findStrings>
     <replaceStrings>
       <replace>/</replace>
@@ -225,20 +259,21 @@
         <option value="$PROJECT_DIR$/goadmin/models/IndexModel.go" />
         <option value="$PROJECT_DIR$/goadmin/route/admin.go" />
         <option value="$PROJECT_DIR$/goadmin/route/init.go" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/goadmin/resources/views/index/index.html___jb_tmp___" />
-        <option value="$PROJECT_DIR$/db/init.go" />
         <option value="$PROJECT_DIR$/routes/index.go" />
         <option value="$PROJECT_DIR$/goadmin/resources/assets/style/AdminLTE.css" />
-        <option value="$PROJECT_DIR$/goadmin/resources/views/index/index.html" />
         <option value="D:/Go/src/runtime/asm.s" />
         <option value="D:/Go/src/runtime/asm_amd64.s" />
-        <option value="$PROJECT_DIR$/goadmin/models/MenuModel.go" />
-        <option value="$PROJECT_DIR$/goadmin/resources/views/layout/content.html" />
-        <option value="$PROJECT_DIR$/main.go" />
-        <option value="$PROJECT_DIR$/goadmin/resources/views/layout/index.html" />
         <option value="$PROJECT_DIR$/goadmin/middleware/common.go" />
+        <option value="$PROJECT_DIR$/main.go" />
+        <option value="$PROJECT_DIR$/goadmin/resources/views/index/q1.html" />
+        <option value="$PROJECT_DIR$/goadmin/resources/views/index/index.html" />
+        <option value="$PROJECT_DIR$/goadmin/models/MenuModel.go" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/db/init.go" />
         <option value="$PROJECT_DIR$/goadmin/utils/common.go" />
+        <option value="$PROJECT_DIR$/goadmin/resources/views/layout/index.html" />
+        <option value="$PROJECT_DIR$/goadmin/resources/views/layout/content.html" />
         <option value="$PROJECT_DIR$/goadmin/controllers/IndexController.go" />
       </list>
     </option>
@@ -267,10 +302,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="384" />
-    <option name="y" value="1" />
-    <option name="width" value="1525" />
-    <option name="height" value="945" />
+    <option name="x" value="415" />
+    <option name="y" value="27" />
+    <option name="width" value="1676" />
+    <option name="height" value="910" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -335,6 +370,14 @@
               <item name="goadmin" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="goadmin" type="462c0819:PsiDirectoryNode" />
+              <item name="goadmin" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="layout" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -348,6 +391,66 @@
               <item name="goadmin" type="462c0819:PsiDirectoryNode" />
               <item name="goadmin" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;goadmin&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;goadmin&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;goadmin&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;goadmin&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+              <item name="jinzhu" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;goadmin&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+              <item name="jinzhu" type="462c0819:PsiDirectoryNode" />
+              <item name="gorm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;goadmin&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+              <item name="jinzhu" type="462c0819:PsiDirectoryNode" />
+              <item name="gorm" type="462c0819:PsiDirectoryNode" />
+              <item name="dialects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="goadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="GOPATH &lt;goadmin&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+              <item name="jinzhu" type="462c0819:PsiDirectoryNode" />
+              <item name="gorm" type="462c0819:PsiDirectoryNode" />
+              <item name="dialects" type="462c0819:PsiDirectoryNode" />
+              <item name="mysql" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -415,24 +518,33 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="384" y="1" width="1525" height="945" extended-state="0" />
+    <frame x="415" y="27" width="1676" height="910" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4910859" visible="true" weight="0.28668943" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4910859" visible="true" weight="0.26361385" />
       <window_info id="Favorites" order="1" sideWeight="0.5089141" side_tool="true" weight="0.28259385" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" weight="0.3298969" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.32962963" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5006859" side_tool="true" weight="0.27448454" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="5" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49931413" visible="true" weight="0.23827161" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49931413" visible="true" weight="0.24903226" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="bottom" id="TODO" order="10" weight="0.32962963" />
       <window_info anchor="right" id="Database" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -446,38 +558,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/goadmin/resources/assets/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret column="13516" selection-start-column="13516" selection-end-column="13516" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/goadmin/resources/assets/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="8" column="721" selection-start-line="8" selection-start-column="721" selection-end-line="8" selection-end-column="721" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/goadmin/models/IndexModel.go" />
-    <entry file="file://$PROJECT_DIR$/goadmin/controllers/userController.go" />
-    <entry file="file://$PROJECT_DIR$/../gopkg.in/mgo.v2/session.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="1623" selection-start-line="1623" selection-end-line="1623" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/goadmin/route/init.go" />
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/goadmin/resources/views/index/index.html___jb_tmp___" />
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.promise.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -593,20 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/init.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/GOPATH/go/src/github.com/jinzhu/gorm/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="314" column="22" selection-start-line="314" selection-start-column="22" selection-end-line="314" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/goland.jar!/resources/html5-schema/html5/web-forms.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -625,13 +691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="262" column="5" selection-start-line="262" selection-start-column="5" selection-end-line="262" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/goadmin/resources/views/index/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="7" lean-forward="true" selection-end-line="2" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -688,13 +747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/goadmin/models/MenuModel.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/GOPATH/go/src/github.com/gin-gonic/gin/logger.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -730,44 +782,187 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/goland.jar!/resources/html5-schema/html5chars.ent">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="234">
+          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../github.com/beevik/etree/etree.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="762" column="18" selection-start-line="762" selection-start-column="18" selection-end-line="762" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/GOPATH/go/src/github.com/jinzhu/gorm/scope.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="374" column="18" selection-start-line="374" selection-start-column="18" selection-end-line="374" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/GOPATH/go/src/github.com/jinzhu/gorm/dialects/mysql/mysql.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/goadmin/resources/views/index/q1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="27" column="93" lean-forward="true" selection-start-line="27" selection-start-column="93" selection-end-line="27" selection-end-column="93" />
+          <folding>
+            <element signature="n#li#0;n#ol#0;n#!!top" />
+            <element signature="e#162#167#0#HTML" expanded="true" />
+            <element signature="e#172#177#0#HTML" expanded="true" />
+            <element signature="e#525#530#0#HTML" expanded="true" />
+            <element signature="e#535#540#0#HTML" expanded="true" />
+            <element signature="e#912#917#0#HTML" expanded="true" />
+            <element signature="e#922#927#0#HTML" expanded="true" />
+            <element signature="e#1318#1323#0#HTML" expanded="true" />
+            <element signature="e#1328#1333#0#HTML" expanded="true" />
+            <element signature="e#2551#2556#0#HTML" expanded="true" />
+            <element signature="e#2561#2566#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Go/src/database/sql/sql.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="656" column="5" selection-start-line="656" selection-start-column="5" selection-end-line="656" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Go/src/builtin/builtin.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/init.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="3" column="8" lean-forward="true" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/goadmin/utils/common.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="-15">
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
           <folding>
             <element signature="e#15#95#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/goadmin/resources/views/index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1938">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="e#2216#5823#0#HTML" />
+            <element signature="e#2277#2686#0#HTML" />
+            <element signature="e#2768#3366#0#HTML" />
+            <element signature="e#3386#3963#0#HTML" />
+            <element signature="e#4048#4542#0#HTML" />
+            <element signature="e#4596#5170#0#HTML" />
+            <element signature="e#5910#6328#0#HTML" />
+            <element signature="e#6410#7003#0#HTML" />
+            <element signature="e#7023#7593#0#HTML" />
+            <element signature="e#7613#8191#0#HTML" />
+            <element signature="e#8211#8792#0#HTML" />
+            <element signature="e#8812#9397#0#HTML" />
+            <element signature="e#9417#10002#0#HTML" />
+            <element signature="e#10022#10629#0#HTML" />
+            <element signature="e#10649#11216#0#HTML" />
+            <element signature="e#11236#11822#0#HTML" />
+            <element signature="e#11842#13104#0#HTML" />
+            <element signature="e#13124#14389#0#HTML" />
+            <element signature="e#14409#16925#0#HTML" />
+            <element signature="e#17011#17437#0#HTML" />
+            <element signature="e#17470#20081#0#HTML" />
+            <element signature="e#20187#22656#0#HTML" />
+            <element signature="e#20249#20675#0#HTML" />
+            <element signature="e#20704#22626#0#HTML" />
+            <element signature="e#22681#23244#0#HTML" />
+            <element signature="e#23269#26376#0#HTML" />
+            <element signature="e#26401#28239#0#HTML" />
+            <element signature="e#28264#31390#0#HTML" />
+            <element signature="e#31415#36876#0#HTML" />
+            <element signature="e#36901#40027#0#HTML" />
+            <element signature="e#40052#40607#0#HTML" />
+            <element signature="e#40632#41197#0#HTML" />
+            <element signature="e#41222#41778#0#HTML" />
+            <element signature="e#41803#42371#0#HTML" />
+            <element signature="e#42396#42954#0#HTML" />
+            <element signature="e#42979#43551#0#HTML" />
+            <element signature="e#43576#44172#0#HTML" />
+            <element signature="e#44607#44630#0#HTML" expanded="true" />
+            <element signature="e#45099#45119#0#HTML" expanded="true" />
+            <element signature="e#51808#51828#0#HTML" expanded="true" />
+            <element signature="e#53047#53067#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/GOPATH/go/src/github.com/jinzhu/gorm/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="113" column="13" selection-start-line="113" selection-start-column="13" selection-end-line="113" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/goadmin/resources/views/layout/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12432">
-          <caret line="777" column="8" selection-start-line="777" selection-start-column="8" selection-end-line="777" selection-end-column="8" />
+        <state relative-caret-position="292">
+          <caret line="776" lean-forward="true" selection-start-line="776" selection-end-line="780" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/goadmin/resources/views/layout/content.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2848">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
+        <state relative-caret-position="245">
+          <caret line="224" column="45" lean-forward="true" selection-start-line="224" selection-start-column="45" selection-end-line="224" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="34" column="10" lean-forward="true" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/goadmin/models/MenuModel.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#16#99#0" expanded="true" />
+            <element signature="n#!!block;n#CreateHandle#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/goadmin/controllers/IndexController.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+        <state relative-caret-position="245">
+          <caret line="133" selection-start-line="133" selection-end-line="133" />
           <folding>
-            <element signature="e#719#1480#0" />
-            <element signature="e#3456#4752#0" />
+            <element signature="e#21#279#0" expanded="true" />
           </folding>
         </state>
       </provider>

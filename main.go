@@ -33,8 +33,8 @@ func loadMiddlewares(r *gin.Engine) {
 		"OutputHTML": func(html string) template.HTML {
 			return template.HTML(html)
 		},
-		"OutputJS": func(html string) template.JS {
-			return template.JS(html)
+		"OutputJS": func(js string) template.JS {
+			return template.JS(js)
 		},
 	})
 

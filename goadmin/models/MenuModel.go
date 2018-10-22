@@ -4,7 +4,7 @@ import (
 	"time"
 	"encoding/gob"
 	"net/url"
-	"encoding/xml"
+	"github.com/beevik/etree"
 	"strconv"
 )
 
@@ -38,108 +38,76 @@ type (
 
 	Option map[string]string
 
-	TreeDom struct {
-		XMLName xml.Name `xml:"ol,omitempty"`
-		Class   string   `xml:"class,attr,omitempty"`
-		List    []LiDom  `xml:"li"`
-	}
-
-	LiDom struct {
-		Class    string       `xml:"class,attr,omitempty"`
-		DataId   string       `xml:"data-id,attr"`
-		Handle   DivHandleDom `xml:"div"`
-		ChildDom TreeDom      `xml:"ol,omitempty"`
-	}
-
-	IDom struct {
-		Class string `xml:"class,attr"`
-	}
-
-	ADom struct {
-		Href  string `xml:"href,attr"`
-		Class string `xml:"class,attr"`
-		Title string `xml:",innerxml"`
-	}
-
-	AListDom struct {
-		Href   string `xml:"href,attr"`
-		DataId string `xml:"data-id,attr,omitempty"`
-		Class  string `xml:"class,attr,omitempty"`
-		I      IDom   `xml:"i"`
-	}
-
-	SpanDom struct {
-		Class string     `xml:"class,attr"`
-		AList []AListDom `xml:"a"`
-	}
-
-	DivHandleDom struct {
-		Class  string  `xml:"class,attr"`
-		Fa     IDom    `xml:"i"`
-		Strong string  `xml:"strong"`
-		A      ADom    `xml:"a"`
-		Span   SpanDom `xml:"span"`
+	Tree struct {
+		Doc   *etree.Document
+		Menus []Menu
 	}
 )
 
-func TreeView() {
-
-}
-
-func TreeParse(menus []Menu, currentID int, handle *TreeDom, title string, option *[]Option, depth int) {
-	var currentIndent string
-	for i := 0; i < depth; i++ {
-		currentIndent += Indent
-	}
-	*option = append(*option, Option{"Value":strconv.Itoa(currentID),"Text":currentIndent + title})
-	//Is a Child Node
-	children, isChild := CheckIsAChild(menus, currentID)
+func (t *Tree) TreeView(handle *etree.Element, currentID int, option *[]Option, depth int) {
+	children, isChild := t.CheckIsAChild(currentID)
 	if isChild {
-		//Create Child Node
+		ol := handle.CreateElement("ol")
+		ol.CreateAttr("class", "dd-list")
 		for _, v := range children {
-			Li := LiDom{
-				Class:  "dd-item",
-				DataId: strconv.Itoa(v.ID),
-				Handle: DivHandleDom{
-					Class: "dd-handle",
-					Fa: IDom{
-						Class: "fa " + v.Icon,
-					},
-					Strong: v.Title,
-					A: ADom{
-						Href:  v.Uri,
-						Class: "dd-nodrag",
-						Title: "&nbsp;&nbsp;" + v.Uri,
-					},
-					Span: SpanDom{
-						Class: "pull-right dd-nodrag",
-						AList: []AListDom{
-							{
-								Href: "/auth/menu/" + strconv.Itoa(v.ID) + "/edit",
-								I: IDom{
-									Class: "fa fa-edit",
-								},
-							},
-							{
-								Href:   "javascript:void(0);",
-								DataId: strconv.Itoa(v.ID),
-								Class:  "tree_branch_delete",
-								I: IDom{
-									Class: "fa fa-trash",
-								},
-							},
-						},
-					},
-				},
-			}
-			handle.List = append(handle.List, Li)
-			TreeParse(children, v.ID, handle, v.Title, option, depth+1)
+			createHandle := t.CreateHandle(&v, ol)
+			t.TreeView(createHandle, v.ID, option, depth)
 		}
 	}
+
 }
 
-func CheckIsAChild(menus []Menu, CurrentNodeId int) (Children []Menu, status bool) {
-	for _, v := range menus {
+func (t *Tree) CreateList() *etree.Element {
+	t.Doc = etree.NewDocument()
+	t.Doc.Indent(2)
+	ol := t.Doc.CreateElement("ol")
+	ol.CreateAttr("class", "dd-list")
+	return ol
+}
+
+func (t *Tree) CreateHandle(v *Menu, ol *etree.Element) *etree.Element {
+	ddItem := ol.CreateElement("li")
+	ddItem.CreateAttr("class", "dd-item")
+	ddItem.CreateAttr("data-id", strconv.Itoa(v.ID))
+
+	ddHandle := ddItem.CreateElement("div")
+	ddHandle.CreateAttr("class", "dd-handle")
+
+	fa := ddHandle.CreateElement("i")
+	fa.SetText("")
+	fa.CreateAttr("class", "fa "+v.Icon)
+
+	strong := ddHandle.CreateElement("strong")
+	strong.SetText(v.Title)
+
+	ddNodrag := ddHandle.CreateElement("a")
+	ddNodrag.CreateAttr("class", "dd-nodrag")
+	ddNodrag.CreateAttr("href", v.Uri)
+	ddNodrag.SetText("    " + v.Uri)
+
+	pullRight := ddHandle.CreateElement("span")
+	pullRight.CreateAttr("class", "pull-right dd-nodrag")
+
+	rightEdit := pullRight.CreateElement("a")
+	rightEdit.CreateAttr("href", "/auth/menu/"+strconv.Itoa(v.ID)+"/edit")
+
+	rightEditI := rightEdit.CreateElement("i")
+	rightEditI.SetText("")
+	rightEditI.CreateAttr("class", "fa fa-edit")
+
+	rightDelete := pullRight.CreateElement("a")
+	rightDelete.CreateAttr("class", "tree_branch_delete")
+	rightDelete.CreateAttr("data-id", strconv.Itoa(v.ID))
+	rightDelete.CreateAttr("href", "javascript:void(0);")
+
+	rightDeleteI := rightDelete.CreateElement("i")
+	rightDeleteI.SetText("")
+	rightDeleteI.CreateAttr("class", "fa fa-trash")
+	return ddItem
+}
+
+func (t *Tree) CheckIsAChild(CurrentNodeId int) (Children []Menu, status bool) {
+	for _, v := range t.Menus {
 		if v.Pid == CurrentNodeId {
 			Children = append(Children, v)
 		}

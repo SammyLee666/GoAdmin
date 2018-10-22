@@ -22,3 +22,24 @@ func (t *toastr) Success(message string) {
 	session.AddFlash(js, "toastr")
 	session.Save()
 }
+
+func (t *toastr) Info(message string) {
+	js := fmt.Sprintf("toastr.%s('%s');", "info", message)
+	session := sessions.Default(t.context)
+	session.AddFlash(js, "toastr")
+	session.Save()
+}
+
+func (t *toastr) Warning(message string) {
+	js := fmt.Sprintf("toastr.%s('%s');", "warning", message)
+	session := sessions.Default(t.context)
+	session.AddFlash(js, "toastr")
+	session.Save()
+}
+
+func (t *toastr) Error(message string) {
+	js := fmt.Sprintf("toastr.%s('%s');", "error", message)
+	session := sessions.Default(t.context)
+	session.AddFlash(js, "toastr")
+	session.Save()
+}

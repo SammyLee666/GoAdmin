@@ -10,9 +10,7 @@ import (
 	"github.com/gin-contrib/sessions"
 	"net/url"
 	"goadmin/db"
-	"encoding/xml"
 	"log"
-	"strconv"
 	"goadmin/goadmin/utils"
 )
 
@@ -20,93 +18,43 @@ func Show(c *gin.Context) {
 	var oldMsg url.Values
 	var errMsg models.ErrMsg
 	var menus []models.Menu
-	var tree models.TreeDom
-	var Li models.LiDom
+	option := new([]models.Option)
 
 	db.Mysql.Find(&menus)
+	//a := []int{1}
+	//db.Mysql.Exec("update menus set `order` = ? where id = ?;update menus set `order` = ? where id = ?;update menus set `order` = ? where id = ?;" )
 
-	tree = models.TreeDom{Class: "dd-list"}
-	option := new([]models.Option)
-	*option = append(*option, models.Option{"Value": "0", "Selected": "selected", "Text": "Root"})
-
-	RootCounter := 0
+	//TreeView
+	tree := models.Tree{Menus: menus}
+	ol := tree.CreateList()
 	for _, v := range menus {
-
 		if v.Pid == 0 {
-			//Create Root Node
-			Li = models.LiDom{
-				Class:  "dd-item",
-				DataId: strconv.Itoa(v.ID),
-				Handle: models.DivHandleDom{
-					Class: "dd-handle",
-					Fa: models.IDom{
-						Class: "fa " + v.Icon,
-					},
-					Strong: v.Title,
-					A: models.ADom{
-						Href:  v.Uri,
-						Class: "dd-nodrag",
-						Title: "&nbsp;&nbsp;" + v.Uri,
-					},
-					Span: models.SpanDom{
-						Class: "pull-right dd-nodrag",
-						AList: []models.AListDom{
-							{
-								Href: "/auth/menu/" + strconv.Itoa(v.ID) + "/edit",
-								I: models.IDom{
-									Class: "fa fa-edit",
-								},
-							},
-							{
-								Href:   "javascript:void(0);",
-								DataId: strconv.Itoa(v.ID),
-								Class:  "tree_branch_delete",
-								I: models.IDom{
-									Class: "fa fa-trash",
-								},
-							},
-						},
-					},
-				},
-				//ChildDom: tree,
-			}
-			tree.List = append(tree.List, Li)
-
-			//Is a Child Node
-			handle := models.TreeDom{Class: "dd-list"}
-			models.TreeParse(menus, v.ID, &handle, v.Title, option, 1)
-			tree.List[RootCounter].ChildDom = handle
-			RootCounter ++
+			handle := tree.CreateHandle(&v, ol)
+			tree.TreeView(handle, v.ID, option, 1)
 		}
 	}
-
-	output, err := xml.MarshalIndent(tree, "  ", "    ")
+	treeHtml, err := tree.Doc.WriteToString()
 	if err != nil {
-		log.Printf("error: %v\n", err)
+		log.Println(err.Error())
 	}
-
-	html := string(output)
 
 	session := sessions.Default(c)
 	errors := session.Flashes("errors")
 	oldForm := session.Flashes("oldForm")
 	toastr := session.Flashes("toastr")
 	session.Save()
-
 	if len(errors) > 0 {
 		errMsg = errors[0].(models.ErrMsg)
 	}
 	if len(oldForm) > 0 {
 		oldMsg = oldForm[0].(url.Values)
 	}
-	//TreeView
-	models.TreeView()
 
 	c.HTML(http.StatusOK, "goadmin/layout/index", gin.H{
 		"_errors": errMsg,
 		"_old":    oldMsg,
 		"_toastr": toastr,
-		"tree":    html,
+		"tree":    treeHtml,
 		"select":  option,
 	})
 }
@@ -177,14 +125,14 @@ func Post(c *gin.Context) {
 			c.Redirect(http.StatusFound, c.Request.Header.Get("Referer"))
 			return
 		}
-		model := db.Mysql.Create(&menu)
-		fmt.Println(model)
 
+		db.Mysql.Create(&menu)
 		utils.Toastr(c).Success("提交成功！")
 		c.Redirect(http.StatusFound, c.Request.Header.Get("Referer"))
 		return
 	} else {
 		changeParentId(order)
+		c.JSON(http.StatusOK,gin.H{"message":"保存成功 !"})
 	}
 
 }
@@ -199,18 +147,30 @@ func Dele(c *gin.Context) {
 
 func changeParentId(order string) {
 	var childs []*models.Child
+	var up []map[string]int
 	json.Unmarshal([]byte(order), &childs)
-	parse(childs, 0)
+
+	parse(childs, 0, &up)
+	stmt, err := db.Mysql.DB().Prepare("UPDATE menus SET pid = ? WHERE id = ?")
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	defer stmt.Close()
+	for _, v := range up {
+		stmt.Exec(v["pid"], v["id"])
+	}
 }
 
-func parse(childs []*models.Child, PID int) {
+func parse(childs []*models.Child, PID int, up *[]map[string]int) {
 	for _, v := range childs {
 		//Create
-		fmt.Println(PID, v.ID, v.Child)
-
+		*up = append(*up, map[string]int{"id": v.ID, "pid": PID})
+		//db.Mysql.Debug().Model(models.Menu{ID: v.ID}).Update("pid", PID)
 		if len(v.Child) > 0 {
 			//解析Child
-			parse(v.Child, v.ID)
+			parse(v.Child, v.ID, up)
 		}
 	}
+	return
 }
